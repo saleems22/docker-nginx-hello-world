@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: nginx-helloworld
-        image: swr.cn-east-3.myhuaweicloud.com/batch/docker-nginx-hello-world:<BUILD_TAG>
+        image: swr.ap-southeast-3.myhuaweicloud.com/batch/docker-nginx-hello-world:<BUILD_TAG>
         ports:
         - containerPort: 80
