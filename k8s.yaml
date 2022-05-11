@@ -1,21 +1,28 @@
----
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-helloworld-deployment
+  name: docker-nginx-hello-world
   namespace: default
 spec:
   selector:
     matchLabels:
       app: nginx-helloworld
-  replicas: 1 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
         app: nginx-helloworld
     spec:
       containers:
-      - name: nginx-helloworld
-        image: swr.ap-southeast-3.myhuaweicloud.com/batch/docker-nginx-hello-world:<BUILD_TAG>
+      - image: swr.cn-east-3.myhuaweicloud.com/batch/docker-nginx-hello-world:<BUILD_TAG>
         ports:
-        - containerPort: 80
+           containerPort: 80
+        imagePullPolicy: IfNotPresent
+        command:
+          - sleep
+        args:
+          - '1000'
+        name: nginx-helloworld
+        env:
+        - name: branch
+      imagePullSecrets:
+        - name: default-secret
